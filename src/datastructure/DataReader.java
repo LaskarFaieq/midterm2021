@@ -25,7 +25,7 @@ public class DataReader {
 		 */
 
 		//implementation here
-
+		String textFile = System.getProperty("user.dir") + "/src/data/self-driving-car.txt";
 	}
 }
 
