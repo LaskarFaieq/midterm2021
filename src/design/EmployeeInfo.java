@@ -32,8 +32,79 @@ public class EmployeeInfo extends EmployeeAbstract implements Employee {
 	 */
 
     //implementation here...
+	static String companyName;
+	private int employeeId;
+	private String name;
+	private String departmentName;
+	private int salary;
+	private int performance;
+	public EmployeeInfo() {
+	}
+
+	public EmployeeInfo(int employeeId) {
+		this.employeeId = employeeId;
+	}
+
+	public EmployeeInfo(String name, int employeeId) {
+		this.name = name;
+		this.employeeId = employeeId;
+	}
+
+	public EmployeeInfo(int employeeId, String name, String departmentName) {
+		this.employeeId = employeeId;
+		this.name = name;
+		this.departmentName = departmentName;
+		System.out.println("Employee id: " + employeeId + ". Employee name: " + name + ". Department: " + departmentName);
+	}
 
 
+	public int getEmployeeId() {
+		return employeeId;
+	}
+
+	public void setEmployeeId(int employeeId) {
+		this.employeeId = employeeId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDepartmentName() {
+		return departmentName;
+	}
+
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
+	}
+
+	public static String getCompanyName() {
+		return companyName;
+	}
+
+	public static void setCompanyName(String companyName) {
+		EmployeeInfo.companyName = companyName;
+	}
+
+	public int getSalary() {
+		return salary;
+	}
+
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
+
+	public int getPerformance() {
+		return performance;
+	}
+
+	public void setPerformance(int performance) {
+		this.performance = performance;
+	}
 	/*
 	 * This methods should calculate Employee bonus based on salary and performance.
 	 * Then it will return the total yearly bonus. So you need to implement the logic.
@@ -43,14 +114,21 @@ public class EmployeeInfo extends EmployeeAbstract implements Employee {
 	 */
 
 	public static double calculateEmployeeBonus(int salary, int performance){
-		double total=0;
-		if(performance >= 8){
-			total = salary * .1;
-		}else{
-			total= salary*.08;
+		double yearlyBonus = 0;
+		if (performance == 5) {
+			yearlyBonus = salary * 0.1 * 12;
+		} else if (performance == 4) {
+			yearlyBonus = salary * 0.08 * 12;
+		} else if (performance == 3) {
+			yearlyBonus = salary * 0.06 * 12;
+		} else if (performance == 2) {
+			yearlyBonus = 0;
+			System.out.println("Performance is not on par");
+		} else {
+			yearlyBonus = 0;
+			System.out.println("You're fired.");
 		}
-		System.out.println("Employee's bonus = "+total+"$");
-		return total;
+		return yearlyBonus;
 	}
 	/*
 	 * This methods should calculate Employee Pension based on salary and numbers of years with the company.
@@ -60,18 +138,38 @@ public class EmployeeInfo extends EmployeeAbstract implements Employee {
 
 	public static double calculateEmployeePension(int salary){
 		double total=0;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Please enter start date in format (example: January,2020): ");
+		String joiningDate = sc.nextLine();
+		System.out.println("Please enter today's date in format (example: January 1, 2020): ");
+		String todaysDate = sc.nextLine();
+		String convertedJoiningDate = DateConversion.convertDate(joiningDate);
+		String convertedTodaysDate = DateConversion.convertDate(todaysDate);
+		String startYear = convertedJoiningDate.substring(convertedJoiningDate.length() - 4, convertedJoiningDate.length());
+		String currentYear = convertedTodaysDate.substring(convertedTodaysDate.length() - 4, convertedTodaysDate.length());
 
-        //implementation here...
+		int start = Integer.parseInt(startYear);
+		int current = Integer.parseInt(currentYear);
 
+		int numberOfYears = current - start;
+
+		if (numberOfYears >= 5) {
+			total = salary * .25;
+		} else if (numberOfYears == 4) {
+			total = salary * .20;
+		} else if (numberOfYears == 3) {
+			total = salary * .15;
+		} else if (numberOfYears == 2) {
+			total = salary * .10;
+		} else if (numberOfYears == 1) {
+			total = salary * .05;
+		} else if (numberOfYears == 0) {
+			total = 0;
+		}
+		System.out.println("Total Pension: $" + total);
 
 		return total;
 	}
-
-
-    //implementation here...
-
-
-
 	@Override
 	public int employeeId() {
 		return 0;

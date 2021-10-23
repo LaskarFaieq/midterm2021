@@ -16,6 +16,22 @@ public class UseMap {
 		*
 	    * Use any databases[MongoDB, Oracle, MySql] to store data and retrieve data.
 		*/
+		Map<String, String> state = new HashMap<String, String>();
+		state.put("NY", "New York");
+		state.put("NJ", "New Jersey");
+		state.put("PA", "Pennsylvania");
+
+		System.out.println(state.get("NY"));
+
+		for (Map.Entry entry:state.entrySet()){
+			System.out.println(entry.getKey() + " : " + entry.getValue());
+		}
+
+		List<String> cityOfUSA = new ArrayList<>();
+		cityOfUSA.add("NY");
+		cityOfUSA.add("NJ");
+		cityOfUSA.add("CA");
+
 
 
         //implementation here
